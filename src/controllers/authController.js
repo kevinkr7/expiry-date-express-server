@@ -47,6 +47,18 @@ const authController = {
             return response.status(statusCode).json({ message: error.message });
         }
     },
+
+    logout: (request, response) => {
+        // Clear the JWT cookie by setting the same options used during login
+        // and expiring it immediately (maxAge: 0 / expires in the past)
+        response.clearCookie('jwtToken', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+        });
+
+        return response.status(200).json({ message: 'Logged out successfully' });
+    },
 };
 
 module.exports = authController;
