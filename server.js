@@ -23,6 +23,8 @@ setupSwagger(app);
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/auth', authRoutes);
+const productRoutes = require('./src/routes/productRoutes');
+app.use('/products', productRoutes);
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
 app.get('/health', (request, response) => {
